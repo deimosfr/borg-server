@@ -2,7 +2,7 @@ FROM alpine:latest
 MAINTAINER teissler
 RUN apk add openssh sshfs borgbackup supervisor dcron --no-cache
 RUN adduser -D -u 1000 borg && \
-    adduser borg wheel \
+    adduser borg wheel && \
     ssh-keygen -A && \
     mkdir /backup && \
     chown borg.borg /backup && \
