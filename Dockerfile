@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 MAINTAINER teissler
 RUN apk add openssh sshfs borgbackup supervisor dcron --no-cache
 RUN adduser -D -u 1000 borg && \
