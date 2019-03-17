@@ -6,7 +6,7 @@ RUN apk add openssh sshfs borgbackup supervisor dcron bash --no-cache
 RUN adduser -D -u 1000 borg && \
     adduser borg wheel && \
     ssh-keygen -A && \
-    mkdir /backup && \
+    mkdir /backup /var/log/supervisor && \
     chown borg.borg /backup && \
     sed -i \
         -e 's/^#PasswordAuthentication yes$/PasswordAuthentication no/g' \
