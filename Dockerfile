@@ -1,7 +1,7 @@
 FROM alpine:3.9
 MAINTAINER deimosfr
 
-RUN apk add openssh sshfs borgbackup supervisor dcron --no-cache
+RUN apk add openssh sshfs borgbackup supervisor dcron bash --no-cache
 
 RUN adduser -D -u 1000 borg && \
     adduser borg wheel && \
