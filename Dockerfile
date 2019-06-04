@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:20190508
 MAINTAINER deimosfr
 
 RUN apk add openssh sshfs borgbackup supervisor dcron bash --no-cache
