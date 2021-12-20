@@ -1,21 +1,18 @@
-FROM alpine:20190508
+FROM debian:11-slim
 MAINTAINER deimosfr
 
-RUN apk add openssh sshfs borgbackup supervisor dcron bash --no-cache
+RUN apt-get update && apt-get -y install openssh-server sshfs supervisor cron borgbackup && apt-get clean
 
-RUN adduser -D -u 1000 borg && \
-    adduser borg wheel && \
+RUN useradd -m borg && \
     ssh-keygen -A && \
-    mkdir /backup /var/log/supervisor && \
-    chown borg.borg /backup && \
-    passwd -u borg && \
-    passwd -u root && \
+    mkdir /backup /run/sshd && \
+    chown borg. /backup && \
     sed -i \
         -e 's/^#PasswordAuthentication yes$/PasswordAuthentication no/g' \
         -e 's/^PermitRootLogin without-password$/PermitRootLogin no/g' \
         /etc/ssh/sshd_config
 
-COPY supervisord.conf /etc/supervisord.conf
+COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 EXPOSE 22
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
