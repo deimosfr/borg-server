@@ -1,4 +1,4 @@
-FROM debian:11-slim
+FROM debian:12-slim
 MAINTAINER deimosfr
 
 RUN apt-get update && apt-get -y install openssh-server sshfs supervisor cron borgbackup && apt-get clean
